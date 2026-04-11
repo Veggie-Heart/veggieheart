@@ -1,0 +1,538 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    padding-top: 80px;
+    margin: 0;
+}
+
+/* Header Styling */
+header {
+    background-color: whitesmoke;
+    color: #2a7c6f;
+    padding: 10px 0;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 97%; /* Full width */
+    z-index: 1000; /* Ensure it stays on top of other elements */
+    background-color: white; /* Keep the background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for visibility */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    width: 180px;
+    height: 80px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: #0e0e0e;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #2a7c6f;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: white;
+    color: #2a7c6f;
+}
+
+/* Welcome Section */
+.welcome-section {
+    position: relative;
+    background-color: #2a7c6f;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3; /* Make the image slightly transparent */
+}
+
+.welcome-text {
+    position: relative;
+    z-index: 1; /* Make sure the text is above the image */
+}
+
+.welcome-text h1 {
+    font-size: 3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.transparent-button {
+    padding: 10px 30px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2); /* White transparent button */
+    border: 2px solid white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.transparent-button:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Button becomes more opaque on hover */
+    color: #2a7c6f;
+}
+
+/* Specials Section */
+.specials-section {
+    background-color: #f4f4f4;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.specials-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.specials-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+.special-item {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px; /* Ensure consistency */
+    flex: 1 1 200px; /* Flexible sizing */
+}
+
+.special-item img {
+    width: 100%; 
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.item-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Events Section */
+.events-section {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #f9f9f9;
+}
+
+.events-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #2a7c6f;
+}
+
+.events-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+.event-item {
+    text-align: center;
+    width: 300px; /* Increased width for larger images */
+    background-color: #2a7c6f; /* As per previous request */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white; /* Ensure text is readable on dark background */
+    position: relative; /* For potential future enhancements */
+}
+
+.event-img {
+    width: 100%;
+    height: 200px; /* Increased height for larger images */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.event-description {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.event-date {
+    font-size: 1em;
+    color: white;
+}
+
+/* Opening Hours Section */
+.opening-hours-section {
+    padding: 50px 0;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.opening-hours-container {
+    position: relative;
+    display: block; /* Changed from inline-block to block for full-width */
+    width: 80%; /* Adjust as needed */
+    max-width: 800px; /* Maximum width */
+    margin: 0 auto; /* Center the container */
+}
+
+.opening-hours-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.opening-hours-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    /* Removed background-color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for readability */
+}
+
+.opening-hours-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.opening-hours-text p {
+    font-size: 1.5em;
+    margin: 5px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Quote Section */
+.quote-section {
+    padding: 50px 0;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.quote-container {
+    position: relative;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quote-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.quote-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    /* Removed background-color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.quote-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.quote-text p {
+    font-size: 1.5em;
+    font-style: italic;
+    margin: 5px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Footer Styling */
+footer {
+    background-color: #2a7c6f;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.social-icons {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.social-icons img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Shop Section */
+.shop-section {
+    padding: 40px 0;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.shop-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #2a7c6f;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 20px; /* Space between the items */
+    justify-items: center; /* Center items horizontally */
+    padding: 0 20px;
+}
+
+.product-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 250px; /* Optional: Set a max width for the items */
+}
+
+.product-item img {
+    width: 100%; /* Make the image fill the container */
+    height: 200px; /* Set a consistent height for the images */
+    object-fit: cover; /* Ensure the image fits without distortion */
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.item-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 5px;
+}
+
+/* About Section */
+.about-section {
+    background-color: #2a7c6f;
+    width: 100%; /* Full width */
+    padding: 40px 0; /* Space around the content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for text and image */
+.about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between the text and image */
+    width: 80%; /* Adjust as needed */
+}
+
+/* Text Container */
+.text-container {
+    flex: 1; /* Equal width for both divs */
+    max-width: 500px; /* Optional: Set a max width for better control */
+    padding: 20px; /* Add padding inside the box */
+    background-color: white; /* Optional: Add background color for better contrast */
+    border-radius: 10px; /* Optional: Rounded corners */
+}
+
+.text-container p {
+    color: #2a7c6f; /* Text color */
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 0; /* Remove default margin */
+}
+
+.text-container h1 {
+    color: #2a7c6f;
+}
+
+/* Image Container */
+.image-container {
+    flex: 1; /* Equal width for both divs */
+    max-width: 500px; /* Optional: Set a max width for better control */
+}
+
+.image-container img {
+    width: 100%; /* Full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: Rounded corners */
+}
+
+/* Video Section */
+.video-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.video-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #2a7c6f;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 30%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 1080px;
+    margin: 0 auto;
+    border-radius: 10px; /* Optional: Rounded corners */
+    background-color: #000; /* Optional: Black background */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: #2a7c6f;
+    padding: 40px 0;
+}
+
+.contact-container {
+    width: 1080px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.contact-info {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.contact-info h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #2a7c6f;
+}
+
+.contact-info p {
+    font-size: 1.2em;
+    color: #2a7c6f;
+}
+
+.contact-form {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2a7c6f;
+}
+
+.contact-form input, .contact-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    align-self: flex-start;
+    padding: 10px 20px;
+    color: white;
+    background-color: #2a7c6f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #1e5b4b; /* Slightly darker shade on hover */
+}
