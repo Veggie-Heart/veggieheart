@@ -1,25 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Visit | Dennis' Vege Stall</title>
+    <title>Veggie Heart</title>
     <meta charset="UTF-8">
-    <meta name="author" content="Michaul Winzey">
-    <meta name="description" content="Contact Dennis' Vege Stall">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.5, maximum-scale=2.0">
+    <meta name="description" content="Shopping Website for Mini-Mart in Trinidad">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar">
-            <img src="images/micvegelogo.png" alt="Mini-Mart Logo" class="logo">
-            <div class="nav-links">
-                <a href="index.html"><b>Home</b></a>
-                <a href="shop.html"><b>Shop</b></a>
-                <a href="about.html"><b>About</b></a>
-                <a href="visit.html"><b>Visit</b></a>
-            </div>
-        </nav>
-    </header>
+
+<header class="header">
+    <h1>
+        <a href="index.html">
+            <img src="images/favicon.ico" alt="Logo" width="30">
+        </a>
+        <span>Veggie</span> Heart
+    </h1>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="visit.html">Visit</a>
+    </nav>
+
+    <div class="icons">
+        <div class="fa fa-search" id="search-icon"></div>
+        <div class="fa fa-shopping-cart" id="cart-icon"></div>
+        <div class="fa fa-user" id="user-icon"></div>
+    </div>
+
+    <form class="search-form">
+        <input type="search" id="search-box" placeholder="Search products...">
+        <label for="search-box" class="fa fa-search"></label>
+    </form>
+
+    <form class="login-form">
+        <h3>Login</h3>
+        <input type="email" placeholder="Email" class="box">
+        <input type="password" placeholder="Password" class="box">
+
+        <div class="remember">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember Me</label>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+        <p>Don't have an account? <a href="#">Register Now</a></p>
+    </form>
+
+</header>
 
     <div class="contact-section">
         <div class="contact-container">
@@ -44,9 +78,14 @@
         </div>
     </div>
 
+    <div class = "map-container">
+        <h2>FIND US HERE</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4998.508796207455!2d-61.399498300000005!3d10.641568799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c3600a30808a9fb%3A0x63fa52505f29ebcd!2sThe%20University%20of%20the%20West%20Indies%20-%20St.%20Augustine%20Campus!5e1!3m2!1sen!2stt!4v1776060913827!5m2!1sen!2stt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
     <footer>
         <div class="footer-content">
-            <p><i>At Dennis' Vege Stall&copy;, we're a chop above the rest. 2024 All rights reserved.</i></p>
+            <p><i>At Veggie Heart&copy;, we're a chop above the rest. 2024 All rights reserved.</i></p>
             <div class="social-icons">
                 <a href="https://www.facebook.com/people/Dennis-Vegetable-Stall/100066563530073/" target="_blank">
                     <img src="images/facebook.png" alt="Facebook">
