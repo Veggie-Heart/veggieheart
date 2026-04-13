@@ -1,95 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Shop | Dennis' Vege Stall</title>
+    <title>Shop | Veggie Heart</title>
     <meta charset="UTF-8">
-    <meta name="author" content="Michaul Winzey">
-    <meta name="description" content="Items on Sale at Dennis' Vege Stall">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.5, maximum-scale=2.0">
+    <meta name="description" content="Shopping Website for Mini-Mart in Trinidad">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    <header>
+
+    <header class="header">
+
+        <h1>
+            <a href="index.html">
+                <img src="images/favicon.ico" alt="Logo" width="30">
+            </a>
+            <span>Veggie</span> Heart
+        </h1>
+
         <nav class="navbar">
-            <img src="images/micvegelogo.png" alt="Mini-Mart Logo" class="logo">
-            <div class="nav-links">
-                <a href="index.html"><b>Home</b></a>
-                <a href="shop.html"><b>Shop</b></a>
-                <a href="about.html"><b>About</b></a>
-                <a href="visit.html"><b>Visit</b></a>
-            </div>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="visit.html">Visit</a>
         </nav>
+
+        <div class="icons">
+            <div class="fa fa-search" id="search-icon"></div>
+            <div class="fa fa-shopping-cart" id="cart-icon"></div>
+            <div class="fa fa-user" id="user-icon"></div>
+        </div>
+
+        <form class="search-form">
+            <input type="search" id="search-box" placeholder="Search products...">
+            <label for="search-box" class="fa fa-search"></label>
+        </form>
+
+        <form class="login-form">
+            <h3>Login</h3>
+            <input type="email" placeholder="Email" class="box">
+            <input type="password" placeholder="Password" class="box">
+
+            <div class="remember">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember Me</label>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+            <p>Don't have an account? <a href="#">Register Now</a></p>
+        </form>
+
     </header>
 
     <section class="shop-section">
         <h2>Our Products</h2>
+
         <div class="product-grid">
+
             <div class="product-item">
-                <img src="images/shadow1.jpg" alt="Shadow Beni">
-                <p class="item-name">Shadow Beni</p>
-                <p class="price">TT$2.00</p>
+                <img src="images/shadow1.jpg">
+                <p>Shadow Beni</p>
+                <p>TT$2.00</p>
+                <button class="btn" onclick="addToCart('Shadow Beni', 2)">Add to Cart</button>
             </div>
+
             <div class="product-item">
-                <img src="images/celery1.jpg" alt="Celery">
-                <p class="item-name">Celery</p>
-                <p class="price">TT$3.00</p>
+                <img src="images/celery1.jpg">
+                <p>Celery</p>
+                <p>TT$3.00</p>
+                <button class="btn" onclick="addToCart('Celery', 3)">Add to Cart</button>
             </div>
+
             <div class="product-item">
-                <img src="images/chive1.jpg" alt="Chives">
-                <p class="item-name">Chives</p>
-                <p class="price">TT$3.00</p>
+                <img src="images/chive1.jpg">
+                <p>Chives</p>
+                <p>TT$3.00</p>
+                <button class="btn" onclick="addToCart('Chives', 3)">Add to Cart</button>
             </div>
+
             <div class="product-item">
-                <img src="images/pineapp1.jpg" alt="Pineapple">
-                <p class="item-name">Pineapple</p>
-                <p class="price">TT$6.00 / 1lb</p>
+                <img src="images/pineapp1.jpg">
+                <p>Pineapple</p>
+                <p>TT$6.00</p>
+                <button class="btn" onclick="addToCart('Pineapple', 6)">Add to Cart</button>
             </div>
+
             <div class="product-item">
                 <img src="images/yam.png" alt="Yam">
                 <p class="item-name">Yam</p>
                 <p class="price">TT$8.00 / 1lb</p>
+                <button class="btn" onclick="addToCart('Yam', 8)">Add to Cart</button>
             </div>
+
             <div class="product-item">
                 <img src="images/orange1.jpg" alt="Oranges">
                 <p class="item-name">Oranges</p>
                 <p class="price">TT$2.00</p>
+                <button class="btn" onclick="addToCart('Oranges', 2)">Add to Cart</button>
             </div>
+            
             <div class="product-item">
                 <img src="images/pumpkin.png" alt="Pumpkin">
                 <p class="item-name">Pumpkin</p>
                 <p class="price">TT$2.00 / 1lb</p>
+                <button class="btn" onclick="addToCart('Pumpkin', 2)">Add to Cart</button>
             </div>
+
             <div class="product-item">
                 <img src="images/cucumber.png" alt="Cucumber">
                 <p class="item-name">Cucumber</p>
                 <p class="price">TT$4.00 / 1lb</p>
+                <button class="btn" onclick="addToCart('Cucumber', 4)">Add to Cart</button>
             </div>
+
             <div class="product-item">
                 <img src="images/dasheen-bush.png" alt="Dasheen Bush">
                 <p class="item-name">Dasheen Bush</p>
                 <p class="price">TT$8.00</p>
+                <button class="btn" onclick="addToCart('Dasheen Bush', 8)">Add to Cart</button>
             </div>
+
             <div class="product-item">
                 <img src="images/potatoes.png" alt="Potatoes">
                 <p class="item-name">Potatoes</p>
                 <p class="price">TT$4.00 / 1lb</p>
+                <button class="btn" onclick="addToCart('Potatoes', 4)">Add to Cart</button>
             </div>
+
             <div class="product-item">
                 <img src="images/carrot.png" alt="Carrot">
                 <p class="item-name">Carrot</p>
                 <p class="price">TT$8.00</p>
+                <button class="btn" onclick="addToCart('Carrot', 8)">Add to Cart</button>   
             </div>
+
             <div class="product-item">
                 <img src="images/eggplant.png" alt="Eggplant">
                 <p class="item-name">Eggplant</p>
                 <p class="price">TT$8.00 / 1lb</p>
+                <button class="btn" onclick="addToCart('Eggplant', 8)">Add to Cart</button>
             </div>
+
         </div>
     </section>
 
-    <footer>
+    <div class="cart">
+        <h2>Your Cart</h2>
+
+        <div id="cart-items"></div>
+
+        <h3>Total: TT$<span id="cart-total">0</span></h3>
+
+        <button class="btn" onclick="checkout()">Checkout</button>
+    </div>
+
+     <footer>
         <div class="footer-content">
-            <p><i>At Dennis' Vege Stall&copy;, we're a chop above the rest. 2024 All rights reserved.</i></p>
+            <p><i>At Veggie Heart&copy;, we're a chop above the rest. 2024 All rights reserved.</i></p>
             <div class="social-icons">
                 <a href="https://www.facebook.com/people/Dennis-Vegetable-Stall/100066563530073/" target="_blank">
                     <img src="images/facebook.png" alt="Facebook">
@@ -102,6 +173,10 @@
                 </a>
             </div>
         </div>
-     </footer>
+    </footer>
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
