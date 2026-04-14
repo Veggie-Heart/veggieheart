@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Veggie Heart</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Shopping Website for Mini-Mart in Trinidad">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1>
+            <a href="index.html">
+                <img src="images/favicon.ico" alt="Logo" width="30">
+            </a>
+            <span>Veggie</span> Heart
+        </h1>
+
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="visit.html">Visit</a>
+            <a href="favorites.html">Favorites</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fa fa-search" id="search-icon"></div>
+            <div class="icon-cart">
+                <i class="fa fa-shopping-cart" id="cart-icon"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="fa fa-user" id="user-icon"></div>
+        </div>
+
+        <form class="search-form">
+            <input type="search" id="search-box" placeholder="Search products...">
+            <label for="search-box" class="fa fa-search"></label>
+        </form>
+
+        <form class="login-form">
+            <h3>Login</h3>
+            <input type="email" placeholder="Email" class="box">
+            <input type="password" placeholder="Password" class="box">
+
+            <div class="remember">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember Me</label>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <p>Don't have an account? <a href="#">Register Now</a></p>
+        </form>
+    </header>
+
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: TT$<span id="cart-total">0</span></h3>
+        <button class="btn" onclick="checkout()">Checkout</button>
+    </div>
+
+    <section class="shop-section">
+        <h2>Your Favorites</h2>
+
+        <div id="favorites-container" class="product-grid"></div>
+    </section>
+
+    <script src="script.js"></script>
+
+    <script>
+        function loadFavoritesPage() {
+            let user = localStorage.getItem("currentUser");
+
+            let container = document.getElementById("favorites-container");
+
+            if (!user) {
+                container.innerHTML = "<p>Please login to view favorites.</p>";
+                return;
+            }
+
+            let favorites = JSON.parse(localStorage.getItem("favorites_" + user)) || [];
+
+            if (favorites.length === 0) {
+                container.innerHTML = "<p>No favorites yet.</p>";
+                return;
+            }
+
+            container.innerHTML = "";
+
+            favorites.forEach(item => {
+                container.innerHTML += `
+                    <div class="product-item">
+                        <img src="${item.image}" style="width:100px;">
+                        <p>${item.name}</p>
+                        <button onclick="removeFavorite('${item.name}')">Remove ❌</button>
+                    </div>
+            `;
+            });
+        }
+
+        function removeFavorite(name) {
+            let user = localStorage.getItem("currentUser");
+            let key = "favorites_" + user;
+
+            let favorites = JSON.parse(localStorage.getItem(key)) || [];
+
+            favorites = favorites.filter(item => item.name !== name);
+
+            localStorage.setItem(key, JSON.stringify(favorites));
+
+            loadFavoritesPage();
+        }
+
+        window.onload = loadFavoritesPage;
+    </script>
+
+</body>
+
+</html>
