@@ -12,9 +12,7 @@
 </head>
 
 <body>
-
     <header class="header">
-
         <h1>
             <a href="index.html">
                 <img src="images/favicon.ico" alt="Logo" width="30">
@@ -31,7 +29,10 @@
 
         <div class="icons">
             <div class="fa fa-search" id="search-icon"></div>
-            <div class="fa fa-shopping-cart" id="cart-icon"></div>
+            <div class="icon-cart">
+                <i class="fa fa-shopping-cart" id="cart-icon"></i>
+                <span id="cart-count">0</span>
+            </div>
             <div class="fa fa-user" id="user-icon"></div>
         </div>
 
@@ -55,6 +56,13 @@
         </form>
 
     </header>
+
+    <div class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <h3>Total: TT$<span id="cart-total">0</span></h3>
+    <button class="btn" onclick="checkout()">Checkout</button>
+    </div>
 
     <section class="shop-section">
         <h2>Our Products</h2>
@@ -178,5 +186,4 @@
     <script src="script.js"></script>
 
 </body>
-
 </html>
