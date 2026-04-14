@@ -43,25 +43,24 @@ function getCurrentUser() {
     return localStorage.getItem("currentUser");
 }
 
-function toggleFavorite(itemName) {
-    let user = getCurrentUser();
+function toggleFavorite(name, image) {
+    let user = localStorage.getItem("currentUser");
 
     if (!user) {
         loginForm.classList.add("active");
         return;
     }
-
     let key = "favorites_" + user;
     let favorites = JSON.parse(localStorage.getItem(key)) || [];
 
-    if (favorites.includes(itemName)) {
-        favorites = favorites.filter(item => item !== itemName);
+    let exists = favorites.find(item => item.name === name);
+
+    if (exists) {
+        favorites = favorites.filter(item => item.name !== name);
     } else {
-        favorites.push(itemName);
+        favorites.push({ name, image });
     }
-
     localStorage.setItem(key, JSON.stringify(favorites));
-
     updateFavoriteButtons();
 }
 
