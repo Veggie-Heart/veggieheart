@@ -20,7 +20,7 @@ if (userBtn && loginForm && searchForm) {
     };
 }
 
-/* BOB */
+/* BOB and others */
 if (loginForm) {
     loginForm.onsubmit = (e) => {
         e.preventDefault();
@@ -29,11 +29,58 @@ if (loginForm) {
         let pass = loginForm.querySelector('input[type="password"]').value;
 
         if ((email === "bob@mail.com" || email === "bob") && pass === "bobpass") {
+            localStorage.setItem("currentUser", "bob");
             alert("Login successful!");
+            loginForm.classList.remove('active');
         } else {
             alert("Invalid credentials");
         }
     };
+}
+
+/* Saving favorite info*/
+function getCurrentUser() {
+    return localStorage.getItem("currentUser");
+}
+
+function toggleFavorite(itemName) {
+    let user = getCurrentUser();
+
+    if (!user) {
+        loginForm.classList.add("active");
+        return;
+    }
+
+    let key = "favorites_" + user;
+    let favorites = JSON.parse(localStorage.getItem(key)) || [];
+
+    if (favorites.includes(itemName)) {
+        favorites = favorites.filter(item => item !== itemName);
+    } else {
+        favorites.push(itemName);
+    }
+
+    localStorage.setItem(key, JSON.stringify(favorites));
+
+    updateFavoriteButtons();
+}
+
+
+function updateFavoriteButtons() {
+    let user = getCurrentUser();
+    if (!user) return;
+
+    let key = "favorites_" + user;
+    let favorites = JSON.parse(localStorage.getItem(key)) || [];
+
+    document.querySelectorAll('button[onclick*="toggleFavorite"]').forEach(btn => {
+        let itemName = btn.getAttribute('onclick').match(/toggleFavorite\('(.*)'\)/)[1];
+        if (favorites.includes(itemName)) {
+            btn.innerHTML = '❤️';
+        } else {
+            btn.innerHTML = '🤍';
+        }
+    });
 }
 
 window.onscroll = () => {
@@ -138,12 +185,6 @@ if (cartIcon) {
     };
 }
 
-if (cartIcon && cartBox) {
-    cartIcon.onclick = () => {
-        cartBox.classList.toggle('active');
-    };
-}
-
 function updateCartCount() {
     let count = document.getElementById("cart-count");
     if (count) count.innerText = cart.length;
@@ -153,4 +194,5 @@ function updateCartCount() {
 window.onload = () => {
     displayCart();
     updateCartCount();
+    updateFavoriteButtons();
 };
