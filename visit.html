@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>Veggie Heart</title>
+    <title>Visit Us | Veggie Heart</title>
     <meta charset="UTF-8">
     <meta name="description" content="Shopping Website for Mini-Mart in Trinidad">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -29,9 +30,12 @@
     </nav>
 
     <div class="icons">
-        <div class="fa fa-search" id="search-icon"></div>
-        <div class="fa fa-shopping-cart" id="cart-icon"></div>
-        <div class="fa fa-user" id="user-icon"></div>
+            <div class="fa fa-search" id="search-icon"></div>
+            <div class="icon-cart">
+                <i class="fa fa-shopping-cart" id="cart-icon"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="fa fa-user" id="user-icon"></div>
     </div>
 
     <form class="search-form">
@@ -54,6 +58,13 @@
     </form>
 
 </header>
+
+    <div class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <h3>Total: TT$<span id="cart-total">0</span></h3>
+    <button class="btn" onclick="checkout()">Checkout</button>
+    </div>
 
     <div class="contact-section">
         <div class="contact-container">
@@ -99,5 +110,6 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
