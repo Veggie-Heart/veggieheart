@@ -1,0 +1,15 @@
+{
+  "name": "Veggie Heart",
+  "short_name": "VeggieHeart",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2a7c6f",
+  "icons": [
+    {
+      "src": "images/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
