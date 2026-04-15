@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
-    /* Font Awesome */
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    /* pwa */
+    <!-- pwa -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4CAF50">
 </head>
@@ -73,6 +73,23 @@
         <div id="favorites-container" class="product-grid"></div>
     </section>
 
+    <footer>
+        <div class="footer-content">
+            <p><i>At Veggie Heart&copy;, we're a chop above the rest. 2026 All rights reserved.</i></p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="images/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://wa.me/18681234567" target="_blank">
+                    <img src="images/whatsapp.png" alt="WhatsApp">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="images/instagram.png" alt="Instagram">
+                </a>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 
     <script>
@@ -119,7 +136,7 @@
             loadFavoritesPage();
         }
 
-        window.onload = loadFavoritesPage;
+        window.addEventListener('load', loadFavoritesPage);
     </script>
 
 </body>
