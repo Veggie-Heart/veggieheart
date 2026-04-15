@@ -1,8 +1,21 @@
+function isLoggedIn() {
+    return localStorage.getItem("currentUser");
+}
+
+function getCurrentUser() {
+    return localStorage.getItem("currentUser");
+}
+
+function getCartKey() {
+    let user = getCurrentUser();
+    return "cart_" + user;
+}
+
 let searchForm = document.querySelector('.search-form');
 let loginForm = document.querySelector('.login-form');
 let navbar = document.querySelector('.navbar');
+let cartIcon = document.querySelector('#cart-icon');
 
-/* Searchbar */
 let searchBtn = document.querySelector('#search-icon');
 if (searchBtn && searchForm && loginForm) {
     searchBtn.onclick = () => {
@@ -11,7 +24,6 @@ if (searchBtn && searchForm && loginForm) {
     };
 }
 
-/* login */
 let userBtn = document.querySelector('#user-icon');
 if (userBtn && loginForm && searchForm) {
     userBtn.onclick = () => {
@@ -20,7 +32,6 @@ if (userBtn && loginForm && searchForm) {
     };
 }
 
-/* BOB and others */
 if (loginForm) {
     loginForm.onsubmit = (e) => {
         e.preventDefault();
@@ -29,27 +40,33 @@ if (loginForm) {
         let pass = loginForm.querySelector('input[type="password"]').value;
 
         if ((email === "bob@mail.com" || email === "bob") && pass === "bobpass") {
+
             localStorage.setItem("currentUser", "bob");
+
             alert("Login successful!");
             loginForm.classList.remove('active');
+
+            loadCart();
+            updateFavoriteButtons();
+            displayCart();
+            updateCartCount();
+
         } else {
             alert("Invalid credentials");
         }
     };
 }
 
-/* Saving favorite info*/
-function getCurrentUser() {
-    return localStorage.getItem("currentUser");
-}
-
+// Favorites
 function toggleFavorite(name, image) {
-    let user = localStorage.getItem("currentUser");
+
+    let user = getCurrentUser();
 
     if (!user) {
         loginForm.classList.add("active");
         return;
     }
+
     let key = "favorites_" + user;
     let favorites = JSON.parse(localStorage.getItem(key)) || [];
 
@@ -60,35 +77,30 @@ function toggleFavorite(name, image) {
     } else {
         favorites.push({ name, image });
     }
+
     localStorage.setItem(key, JSON.stringify(favorites));
     updateFavoriteButtons();
 }
 
-
 function updateFavoriteButtons() {
+
     let user = getCurrentUser();
     if (!user) return;
 
-    let key = "favorites_" + user;
-    let favorites = JSON.parse(localStorage.getItem(key)) || [];
+    let favorites = JSON.parse(localStorage.getItem("favorites_" + user)) || [];
 
-    document.querySelectorAll('button[onclick*="toggleFavorite"]').forEach(btn => {
-        let itemName = btn.getAttribute('onclick').match(/toggleFavorite\('(.*)'\)/)[1];
-        if (favorites.includes(itemName)) {
-            btn.innerHTML = '❤️';
-        } else {
-            btn.innerHTML = '🤍';
-        }
+    document.querySelectorAll("[onclick^='toggleFavorite']").forEach(btn => {
+
+        let args = btn.getAttribute("onclick");
+        let name = args.match(/'(.*?)'/)[1];
+
+        let found = favorites.find(item => item.name === name);
+
+        btn.textContent = found ? "💖" : "🤍";
     });
 }
 
-window.onscroll = () => {
-    if (searchForm) searchForm.classList.remove('active');
-    if (loginForm) loginForm.classList.remove('active');
-    if (navbar) navbar.classList.remove('active');
-};
-
-/* OpenWeatherMap API */
+// Weather API
 const apiKey = "8f3fe5ecc73dc907fe0cdf1f9aae232c";
 
 async function getWeather() {
@@ -96,47 +108,71 @@ async function getWeather() {
         let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Trinidad&units=metric&appid=${apiKey}`);
         let data = await res.json();
 
-        let temp = data.main.temp;
-        let desc = data.weather[0].description;
-
         let weatherBox = document.getElementById("weather-box");
+
         if (weatherBox) {
             weatherBox.innerHTML = `
-                <p><strong>Temperature:</strong> ${temp}°C</p>
-                <p><strong>Condition:</strong> ${desc}</p>
+                <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
+                <p><strong>Condition:</strong> ${data.weather[0].description}</p>
             `;
         }
-    } catch (error) {
+    } catch {
         let weatherBox = document.getElementById("weather-box");
-        if (weatherBox) {
-            weatherBox.innerHTML = "Failed to load weather.";
-        }
+        if (weatherBox) weatherBox.innerHTML = "Failed to load weather.";
     }
 }
 
 getWeather();
 
-/* Cart */
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// Cart 
+let cart = [];
+
+function loadCart() {
+    if (!isLoggedIn()) {
+        cart = [];
+        return;
+    }
+
+    cart = JSON.parse(localStorage.getItem(getCartKey())) || [];
+}
+
+function saveCart() {
+    if (!isLoggedIn()) return;
+    localStorage.setItem(getCartKey(), JSON.stringify(cart));
+}
 
 function addToCart(name, price) {
+
+    if (!isLoggedIn()) {
+        loginForm.classList.add("active");
+        return;
+    }
+
     cart.push({ name, price });
-    localStorage.setItem("cart", JSON.stringify(cart));
+    saveCart();
+
     alert(name + " added to cart!");
+
     displayCart();
     updateCartCount();
+
+    let cartBox = document.querySelector('.cart');
+    if (cartBox) cartBox.classList.add("active");
 }
+
 function displayCart() {
+
     let cartItems = document.getElementById("cart-items");
     let cartBox = document.querySelector(".cart");
-    let total = 0;
 
     if (!cartItems || !cartBox) return;
 
+    let total = 0;
     cartItems.innerHTML = "";
 
     if (cart.length === 0) {
-        cartBox.classList.remove("active");
+        let totalEl = document.getElementById("cart-total");
+        if (totalEl) totalEl.innerText = 0;
         return;
     }
 
@@ -157,25 +193,31 @@ function displayCart() {
 
 function removeItem(index) {
     cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    saveCart();
     displayCart();
     updateCartCount();
 }
 
 function checkout() {
+
+    if (!isLoggedIn()) {
+        loginForm.classList.add("active");
+        return;
+    }
+
     if (cart.length === 0) {
         alert("Cart is empty!");
         return;
     }
 
     alert("Checkout successful!");
+
     cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
+    saveCart();
+
     displayCart();
     updateCartCount();
 }
-
-let cartIcon = document.querySelector('#cart-icon');
 
 if (cartIcon) {
     cartIcon.onclick = () => {
@@ -184,14 +226,15 @@ if (cartIcon) {
     };
 }
 
-function updateCartCount() {
-    let count = document.getElementById("cart-count");
-    if (count) count.innerText = cart.length;
-}
+window.onscroll = () => {
+    if (searchForm) searchForm.classList.remove('active');
+    if (loginForm) loginForm.classList.remove('active');
+    if (navbar) navbar.classList.remove('active');
+};
 
-/* run on page load */
-window.onload = () => {
+window.addEventListener('load', () => { 
+    loadCart();
     displayCart();
     updateCartCount();
     updateFavoriteButtons();
-};
+});
