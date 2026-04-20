@@ -1,5 +1,5 @@
 function isLoggedIn() {
-    return localStorage.getItem("currentUser");
+    return !!localStorage.getItem("currentUser");
 }
 
 function getCurrentUser() {
@@ -11,26 +11,23 @@ function getCartKey() {
     return "cart_" + user;
 }
 
-let searchForm = document.querySelector('.search-form');
+function requireLogin() {
+
+    let user = localStorage.getItem("currentUser");
+
+    if (!user) {
+        document.querySelector(".login-form")?.classList.add("active");
+        alert("Please log in to continue");
+        return false;
+    }
+
+    return true;
+}
+
 let loginForm = document.querySelector('.login-form');
 let navbar = document.querySelector('.navbar');
 let cartIcon = document.querySelector('#cart-icon');
-
-let searchBtn = document.querySelector('#search-icon');
-if (searchBtn && searchForm && loginForm) {
-    searchBtn.onclick = () => {
-        searchForm.classList.toggle('active');
-        loginForm.classList.remove('active');
-    };
-}
-
 let userBtn = document.querySelector('#user-icon');
-if (userBtn && loginForm && searchForm) {
-    userBtn.onclick = () => {
-        loginForm.classList.toggle('active');
-        searchForm.classList.remove('active');
-    };
-}
 
 if (loginForm) {
     loginForm.onsubmit = (e) => {
@@ -47,9 +44,9 @@ if (loginForm) {
             loginForm.classList.remove('active');
 
             loadCart();
-            updateFavoriteButtons();
             displayCart();
             updateCartCount();
+            updateFavoriteButtons();
 
         } else {
             alert("Invalid credentials");
@@ -57,7 +54,15 @@ if (loginForm) {
     };
 }
 
-// Favorites
+if (userBtn && loginForm) {
+    userBtn.onclick = () => {
+        loginForm.classList.toggle('active');
+
+        document.querySelector('.cart')?.classList.remove('active');
+    };
+}
+
+//Favorite
 function toggleFavorite(name, image) {
 
     let user = getCurrentUser();
@@ -100,7 +105,7 @@ function updateFavoriteButtons() {
     });
 }
 
-// Weather API
+//Weather API
 const apiKey = "8f3fe5ecc73dc907fe0cdf1f9aae232c";
 
 async function getWeather() {
@@ -128,20 +133,20 @@ let contactForm = document.getElementById("contact-form");
 
 if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
         alert("Message sent!");
-
         contactForm.reset();
     });
 }
 
-// Cart 
+// Cart
 let cart = [];
 
 function loadCart() {
     if (!isLoggedIn()) {
         cart = [];
+        updateCartCount();
         return;
     }
 
@@ -155,10 +160,7 @@ function saveCart() {
 
 function addToCart(name, price) {
 
-    if (!isLoggedIn()) {
-        loginForm.classList.add("active");
-        return;
-    }
+    if (!requireLogin()) return;
 
     cart.push({ name, price });
     saveCart();
@@ -167,14 +169,10 @@ function addToCart(name, price) {
 
     displayCart();
     updateCartCount();
-
-    let cartBox = document.querySelector('.cart');
-    if (cartBox) cartBox.classList.add("active");
 }
 
 function updateCartCount() {
     let countEl = document.getElementById("cart-count");
-
     if (!countEl) return;
 
     if (!isLoggedIn()) {
@@ -189,16 +187,13 @@ function updateCartCount() {
 function displayCart() {
 
     let cartItems = document.getElementById("cart-items");
-    let cartBox = document.querySelector(".cart");
-
-    if (!cartItems || !cartBox) return;
+    if (!cartItems) return;
 
     let total = 0;
     cartItems.innerHTML = "";
 
     if (cart.length === 0) {
-        let totalEl = document.getElementById("cart-total");
-        if (totalEl) totalEl.innerText = 0;
+        document.getElementById("cart-total").innerText = 0;
         return;
     }
 
@@ -213,8 +208,7 @@ function displayCart() {
         `;
     });
 
-    let totalEl = document.getElementById("cart-total");
-    if (totalEl) totalEl.innerText = total;
+    document.getElementById("cart-total").innerText = total;
 }
 
 function removeItem(index) {
@@ -226,10 +220,7 @@ function removeItem(index) {
 
 function checkout() {
 
-    if (!isLoggedIn()) {
-        loginForm.classList.add("active");
-        return;
-    }
+    if (!requireLogin()) return;
 
     if (cart.length === 0) {
         alert("Cart is empty!");
@@ -245,8 +236,13 @@ function checkout() {
     updateCartCount();
 }
 
+
 if (cartIcon) {
-    cartIcon.onclick = () => {
+    cartIcon.onclick = (e) => {
+        e.stopPropagation();
+
+        loginForm?.classList.remove("active");
+
         let cartBox = document.querySelector('.cart');
         if (cartBox) cartBox.classList.toggle('active');
     };
@@ -306,13 +302,23 @@ function closeRecipe() {
     document.getElementById("recipe-modal").style.display = "none";
 }
 
-window.onscroll = () => {
-    if (searchForm) searchForm.classList.remove('active');
-    if (loginForm) loginForm.classList.remove('active');
-    if (navbar) navbar.classList.remove('active');
-};
+document.addEventListener("click", function (e) {
 
-window.addEventListener('load', () => { 
+    let cartBox = document.querySelector(".cart");
+    let cartIcon = document.querySelector("#cart-icon");
+
+    if (cartBox && !cartBox.contains(e.target) && !cartIcon.contains(e.target)) {
+        cartBox.classList.remove("active");
+    }
+
+    if (loginForm && !loginForm.contains(e.target) && !e.target.closest("#user-icon")) {
+        loginForm.classList.remove("active");
+    }
+});
+
+//On load
+window.addEventListener('load', () => {
+
     loadCart();
     displayCart();
     updateCartCount();
