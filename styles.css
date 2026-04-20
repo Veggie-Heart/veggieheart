@@ -698,6 +698,60 @@ footer {
     background-color: #1e5b4b; 
 }
 
+/* recipes.html */
+.recipe-search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.recipe-search-bar input {
+    padding: 1rem;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: .5rem;
+    font-size: 1.4rem;
+}
+
+.recipe-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+#recipe-details {
+    font-size: 1.6rem;
+}
+
+.recipe-modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 20px;
+    width: 60%;
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close-btn {
+    float: right;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.recipe-modal-content img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
 /* mobile */
 @media (max-width: 768px) {
     .navbar {
