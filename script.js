@@ -124,6 +124,18 @@ async function getWeather() {
 
 getWeather();
 
+let contactForm = document.getElementById("contact-form");
+
+if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault(); 
+
+        alert("Message sent!");
+
+        contactForm.reset();
+    });
+}
+
 // Cart 
 let cart = [];
 
@@ -158,6 +170,20 @@ function addToCart(name, price) {
 
     let cartBox = document.querySelector('.cart');
     if (cartBox) cartBox.classList.add("active");
+}
+
+function updateCartCount() {
+    let countEl = document.getElementById("cart-count");
+
+    if (!countEl) return;
+
+    if (!isLoggedIn()) {
+        countEl.innerText = 0;
+        return;
+    }
+
+    let savedCart = JSON.parse(localStorage.getItem(getCartKey())) || [];
+    countEl.innerText = savedCart.length;
 }
 
 function displayCart() {
@@ -224,6 +250,60 @@ if (cartIcon) {
         let cartBox = document.querySelector('.cart');
         if (cartBox) cartBox.classList.toggle('active');
     };
+}
+
+//Recipes
+async function searchRecipes() {
+
+    let query = document.getElementById("recipe-search").value;
+
+    if (!query) {
+        alert("Enter something to search!");
+        return;
+    }
+
+    let res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+    let data = await res.json();
+
+    let container = document.getElementById("recipes-container");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    if (!data.meals) {
+        container.innerHTML = "<p>No recipes found.</p>";
+        return;
+    }
+
+    data.meals.forEach(meal => {
+        container.innerHTML += `
+            <div class="product-item">
+                <img src="${meal.strMealThumb}">
+                <h3>${meal.strMeal}</h3>
+                <button class="btn" onclick='showRecipe(${JSON.stringify(meal)})'>
+                    View Recipe
+                </button>
+            </div>
+        `;
+    });
+}
+
+function showRecipe(meal) {
+
+    let modal = document.getElementById("recipe-modal");
+    let details = document.getElementById("recipe-details");
+
+    details.innerHTML = `
+        <h2>${meal.strMeal}</h2>
+        <img src="${meal.strMealThumb}">
+        <p>${meal.strInstructions}</p>
+    `;
+
+    modal.style.display = "block";
+}
+
+function closeRecipe() {
+    document.getElementById("recipe-modal").style.display = "none";
 }
 
 window.onscroll = () => {
