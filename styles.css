@@ -125,33 +125,6 @@ body {
     border-radius: 50%;
 }
 
-
-.search-form {
-    position: absolute;
-    top: -200%;
-    right: 2rem;
-    width: 30rem;
-    height: 5rem;
-    display: flex;
-    background: #fff;
-    box-shadow: var(--box-shadow);
-}
-
-.search-form.active {
-    top: 110%;
-}
-
-.search-form input {
-    width: 100%;
-    padding: 1rem;
-}
-
-.search-form label {
-    padding: 1rem;
-    cursor: pointer;
-}
-
-
 .login-form {
     position: absolute;
     top: -300%;
