@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Recipes | Veggie Heart</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Shopping Website for Mini-Mart in Trinidad">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- pwa -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+</head>
+
+<body>
+    <header class="header">
+        <h1>
+            <a href="index.html">
+                <img src="images/favicon.ico" alt="Logo" width="30">
+            </a>
+            <span>Veggie</span> Heart
+        </h1>
+
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="visit.html">Visit</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="recipes.html">Recipes</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fa fa-search" id="search-icon"></div>
+            <div class="icon-cart">
+                <i class="fa fa-shopping-cart" id="cart-icon"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="fa fa-user" id="user-icon"></div>
+        </div>
+
+        <form class="search-form">
+            <input type="search" id="search-box" placeholder="Search products...">
+            <label for="search-box" class="fa fa-search"></label>
+        </form>
+
+        <form class="login-form">
+            <h3>Login</h3>
+            <input type="email" placeholder="Email" class="box">
+            <input type="password" placeholder="Password" class="box">
+
+            <div class="remember">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember Me</label>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <p>Don't have an account? <a href="#">Register Now</a></p>
+        </form>
+    </header>
+
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: TT$<span id="cart-total">0</span></h3>
+        <button class="btn" onclick="checkout()">Checkout</button>
+    </div>
+
+    <section class="shop-section">
+        <h2>Recipes</h2>
+        <div class="recipe-search-bar">
+            <input type="text" id="recipe-search" placeholder="Search recipes...">
+            <button class="btn" onclick="searchRecipes()">Search</button>
+        </div>
+        <div id="recipes-container" class="product-grid"></div>
+
+        <div id="recipe-modal" class="recipe-modal">
+            <div class="recipe-modal-content">
+                <span class="close-btn" onclick="closeRecipe()">&times;</span>
+                <div id="recipe-details"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p><i>At Veggie Heart&copy;, we're a chop above the rest. 2026 All rights reserved.</i></p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="images/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://wa.me/18681234567" target="_blank">
+                    <img src="images/whatsapp.png" alt="WhatsApp">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="images/instagram.png" alt="Instagram">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
